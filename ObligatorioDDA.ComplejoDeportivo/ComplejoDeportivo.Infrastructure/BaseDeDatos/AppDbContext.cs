@@ -10,6 +10,7 @@ namespace ComplejoDeportivo.Infrastructure.BaseDeDatos
         public DbSet<Espacio> Espacios => Set<Espacio>();
         public DbSet<Socio> Socios => Set<Socio>();
         public DbSet<Reserva> Reservas => Set<Reserva>();
+        public DbSet<Usuario> Usuarios => Set<Usuario>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

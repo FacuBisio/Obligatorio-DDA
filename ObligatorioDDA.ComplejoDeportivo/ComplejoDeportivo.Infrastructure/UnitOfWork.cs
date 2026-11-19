@@ -10,6 +10,7 @@ namespace ComplejoDeportivo.Infrastructure
         private IEspacioRepository? _espacioRepository;
         private ISocioRepository? _socioRepository;
         private IReservaRepository? _reservaRepository;
+        private IUsuarioRepository? _usuarioRepository;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -24,6 +25,10 @@ namespace ComplejoDeportivo.Infrastructure
 
         public IReservaRepository ReservaRepository =>
             _reservaRepository ??= new ReservaRepository(_context);
+
+        
+        public IUsuarioRepository UsuarioRepository =>
+            _usuarioRepository ??= new UsuarioRepository(_context);
 
         public async Task<int> Commit()
         {

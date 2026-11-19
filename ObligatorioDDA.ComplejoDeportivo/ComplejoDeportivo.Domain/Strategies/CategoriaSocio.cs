@@ -15,7 +15,7 @@ namespace ComplejoDeportivo.Domain.Strategies
 
     public class SocioPremium : CategoriaSocio
     {
-        private const decimal PorcentajeDescuento = 0.15m; // 15% de descuento (ajustable)
+        private const decimal PorcentajeDescuento = 0.15m; 
         public decimal CalcularDescuento(decimal montoBase) => montoBase * PorcentajeDescuento;
     }
 

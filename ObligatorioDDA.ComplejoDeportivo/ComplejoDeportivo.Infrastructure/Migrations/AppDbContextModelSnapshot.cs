@@ -139,6 +139,44 @@ namespace ComplejoDeportivo.Infrastructure.Migrations
                     b.ToTable("Socios", (string)null);
                 });
 
+            modelBuilder.Entity("ComplejoDeportivo.Domain.Entities.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Rol")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<int?>("SocioId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("SocioId")
+                        .IsUnique()
+                        .HasFilter("[SocioId] IS NOT NULL");
+
+                    b.ToTable("Usuarios", (string)null);
+                });
+
             modelBuilder.Entity("ComplejoDeportivo.Domain.Entities.Espacio", b =>
                 {
                     b.HasOne("ComplejoDeportivo.Domain.Entities.Espacio", "EspacioPadre")
@@ -164,6 +202,16 @@ namespace ComplejoDeportivo.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Espacio");
+
+                    b.Navigation("Socio");
+                });
+
+            modelBuilder.Entity("ComplejoDeportivo.Domain.Entities.Usuario", b =>
+                {
+                    b.HasOne("ComplejoDeportivo.Domain.Entities.Socio", "Socio")
+                        .WithOne()
+                        .HasForeignKey("ComplejoDeportivo.Domain.Entities.Usuario", "SocioId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Socio");
                 });
